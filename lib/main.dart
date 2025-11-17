@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Jurnalku',
-      home: const AccountSettings(),
+      home: const DashboardLogin(),
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:jurnalku/account-settings.dart';
 
 class DashboardLogin extends StatelessWidget {
   const DashboardLogin({super.key});
@@ -12,38 +13,55 @@ class DashboardLogin extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: const Padding(
-          padding: EdgeInsets.only(left: 16),
-          child: Icon(Icons.home, color: Color.fromARGB(255, 0, 0, 0)),
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 16),
+          child: IconButton(
+            onPressed: () {
+              // contoh: navigate ke route home; ubah sesuai route yang diinginkan
+              Navigator.pushNamed(context, '/');
+            },
+            icon: const Icon(Icons.home, color: Color.fromARGB(255, 0, 0, 0)),
+          ),
         ),
         title: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: const [
-        Text(
-          "Profil Siswa",
-          style: TextStyle(
-            fontSize: 16,
-            color: Color.fromARGB(255, 0, 0, 0),
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        Text(
-          "Rombel Siswa",
-          style: TextStyle(fontSize: 13, color: Colors.black54),
-        ),
+            Text(
+              "Profil Siswa",
+              style: TextStyle(
+                fontSize: 16,
+                color: Color.fromARGB(255, 0, 0, 0),
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            Text(
+              "Rombel Siswa",
+              style: TextStyle(fontSize: 13, color: Colors.black54),
+            ),
           ],
         ),
         actions: [
           Padding(
-        padding: const EdgeInsets.only(right: 16),
-        child: CircleAvatar(
-          radius: 22,
-          backgroundImage: NetworkImage("https://via.placeholder.com/150"),
-        ),
+            padding: const EdgeInsets.only(right: 16),
+            child: IconButton(
+              padding: EdgeInsets.zero,
+              onPressed: () {
+                // navigasi ke halaman AccountSettings menggunakan route berbasis widget
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const AccountSettings()),
+                );
+              },
+              icon: const CircleAvatar(
+                radius: 22,
+                backgroundImage: NetworkImage("https://via.placeholder.com/150"),
+              ),
+            ),
           ),
         ],
       ),
+    
       body: SingleChildScrollView(
         child: Column(
           children: [
