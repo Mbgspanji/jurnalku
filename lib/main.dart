@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dashboard.login.dart';
 import 'account-settings.dart';
+import 'login.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Jurnalku',
-      home: const DashboardLogin(),
+      home: const LoginPage(),
     );
   }
 }
