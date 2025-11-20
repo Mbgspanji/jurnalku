@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'dashboard.login.dart';
 
 class AccountSettings extends StatelessWidget {
   const AccountSettings({super.key});
@@ -39,7 +40,13 @@ class AccountSettings extends StatelessWidget {
             Icons.home_outlined,
             color: Color(0xFF64748B),
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => DashboardLogin()),
+              (Route<dynamic> route) => false,
+            );
+          },
         ),
 
         actions: [
@@ -97,11 +104,16 @@ class AccountSettings extends StatelessWidget {
 
               Row(
                 children: [
-                  Text(
-                    "Dashboard / ",
-                    style: GoogleFonts.inter(
-                      fontSize: 14,
-                      color: Color(0xFF64748B),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text(
+                      "Dashboard / ",
+                      style: GoogleFonts.inter(
+                        fontSize: 14,
+                        color: Color(0xFF64748B),
+                      ),
                     ),
                   ),
                   Text(
