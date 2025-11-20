@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:jurnalku/account-settings.dart';
+import 'package:jurnalku/following.dart';
+import 'Kompetensi.dart';
+import 'login.dart';
 
 class DashboardLogin extends StatelessWidget {
   const DashboardLogin({super.key});
@@ -11,57 +14,145 @@ class DashboardLogin extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
         elevation: 0,
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 16),
-          child: IconButton(
-            onPressed: () {
-              // contoh: navigate ke route home; ubah sesuai route yang diinginkan
-              Navigator.pushNamed(context, '/');
-            },
-            icon: const Icon(Icons.home, color: Color.fromARGB(255, 0, 0, 0)),
+        toolbarHeight: 65,
+        automaticallyImplyLeading: false,
+        titleSpacing: 0,
+        title: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Row(
+            children: [
+              Icon(Icons.home, size: 22, color: const Color(0xFF4C5767)),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Text(
+                      "Nama Siswa",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black87,
+                      ),
+                    ),
+                    SizedBox(height: 2),
+                    Text(
+                      "Rombel Siswa",
+                      style: TextStyle(fontSize: 13, color: Color(0xFF6F7A87)),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 12),
+              GestureDetector(
+                onTap: () async {
+                  final RenderBox button =
+                      context.findRenderObject() as RenderBox;
+                  final RenderBox overlay =
+                      Overlay.of(context).context.findRenderObject()
+                          as RenderBox;
+
+                  final position = RelativeRect.fromRect(
+                    Rect.fromPoints(
+                      button.localToGlobal(Offset.zero, ancestor: overlay),
+                      button.localToGlobal(
+                        button.size.bottomRight(Offset.zero),
+                        ancestor: overlay,
+                      ),
+                    ),
+                    Offset.zero & overlay.size,
+                  );
+
+                  final selected = await showMenu<String>(
+                    context: context,
+                    position: position.shift(const Offset(50, 55)),
+                    elevation: 8,
+                    color: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    items: <PopupMenuEntry<String>>[
+                      _menuItem(Icons.home_outlined, "Dashboard"),
+                      _menuItem(Icons.person_outline, "Profil"),
+                      _menuItem(Icons.explore_outlined, "Jelajahi"),
+
+                      const PopupMenuDivider(),
+
+                      _menuItem(Icons.book_outlined, "Jurnal Pembiasaan"),
+                      _menuItem(
+                        Icons.person_search_outlined,
+                        "Permintaan Saksi",
+                      ),
+                      _menuItem(Icons.bar_chart_outlined, "Progress"),
+                      _menuItem(Icons.error_outline, "Catatan Sikap"),
+
+                      const PopupMenuDivider(),
+
+                      _menuItem(Icons.menu_book_outlined, "Panduan Penggunaan"),
+                      _menuItem(Icons.settings_outlined, "Pengaturan Akun"),
+                      _menuItem(Icons.logout, "Log Out"),
+                    ],
+                  );
+
+                  if (selected == null) return;
+
+                  switch (selected) {
+                    case "Dashboard":
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DashboardLogin(),
+                        ),
+                      );
+                      break;
+                    case "Progress":
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Kompetensi()),
+                      );
+                      break;
+                    case "Pengaturan Akun":
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AccountSettings(),
+                        ),
+                      );
+                      break;
+                    case "Log Out":
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginPage()),
+                        (route) => false,
+                      );
+                      break;
+                    case "Permintaan Saksi":
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Following()),
+                      );
+                      break;
+                    default:
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text("$selected belum tersedia")),
+                      );
+                  }
+                },
+                child: const CircleAvatar(
+                  radius: 20,
+                  backgroundImage: NetworkImage(
+                    "https://via.placeholder.com/150",
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
-        title: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: const [
-            Text(
-              "Profil Siswa",
-              style: TextStyle(
-                fontSize: 16,
-                color: Color.fromARGB(255, 0, 0, 0),
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            Text(
-              "Rombel Siswa",
-              style: TextStyle(fontSize: 13, color: Colors.black54),
-            ),
-          ],
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16),
-            child: IconButton(
-              padding: EdgeInsets.zero,
-              onPressed: () {
-                // navigasi ke halaman AccountSettings menggunakan route berbasis widget
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const AccountSettings()),
-                );
-              },
-              icon: const CircleAvatar(
-                radius: 22,
-                backgroundImage: NetworkImage("https://via.placeholder.com/150"),
-              ),
-            ),
-          ),
-        ],
       ),
-    
+
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -250,12 +341,11 @@ class DashboardLogin extends StatelessWidget {
 
             const SizedBox(height: 30),
 
-            _buildProgressAkademik(),
+            _buildProgressAkademik(context),
 
             const SizedBox(height: 30),
 
             _buildFooter(),
-
           ],
         ),
       ),
@@ -482,7 +572,7 @@ class DashboardLogin extends StatelessWidget {
   }
 
   // ignore: unused_element
-  Widget _buildProgressAkademik() {
+  Widget _buildProgressAkademik(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
@@ -491,76 +581,86 @@ class DashboardLogin extends StatelessWidget {
           const Text(
             "Progress Akademik",
             style: TextStyle(
-              fontSize: 18,
+              fontSize: 20,
               fontWeight: FontWeight.bold,
               color: Colors.black87,
             ),
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 20),
 
-          // Status Indicators
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _buildStatusItem(
-                color: const Color(0xFF6A1B9A), // Ungu gelap
-                label: "Selesai",
-                value: "2",
-              ),
-              _buildStatusItem(
-                color: const Color(0xFFAB47BC), // Ungu muda
-                label: "Pending",
-                value: "0",
-              ),
-              _buildStatusItem(
-                color: const Color(0xFF90CAF9), // Biru muda
-                label: "Belum",
-                value: "0",
-              ),
-              _buildStatusItem(
-                color: const Color(0xFF26A69A), // Teal
-                label: "Hari Ini",
-                value: "0",
-              ),
-            ],
+          // Bagian Status (kiri tulisan, kanan angka)
+          Container(
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.05),
+                  blurRadius: 8,
+                  offset: const Offset(0, 3),
+                ),
+              ],
+            ),
+            child: Column(
+              children: [
+                _progressRow(
+                  color: const Color(0xFF6A1B9A),
+                  label: "Selesai",
+                  value: "2",
+                ),
+                const SizedBox(height: 10),
+                _progressRow(
+                  color: const Color(0xFF3F51B5),
+                  label: "Pending",
+                  value: "0",
+                ),
+                const SizedBox(height: 10),
+                _progressRow(
+                  color: const Color(0xFF81D4FA),
+                  label: "Belum",
+                  value: "0",
+                ),
+                const SizedBox(height: 10),
+                _progressRow(
+                  color: const Color(0xFF00838F),
+                  label: "Hari Ini",
+                  value: "0",
+                ),
+              ],
+            ),
           ),
 
-          const SizedBox(height: 24),
+          const SizedBox(height: 30),
 
-          // Lihat Progress Kamu
+          // Tombol Lihat Progress Kamu
           InkWell(
-            onTap: () {
-              // Navigasi ke halaman progress
-            },
+            onTap: () {},
             borderRadius: BorderRadius.circular(12),
             child: Container(
               padding: const EdgeInsets.symmetric(vertical: 12),
-              decoration: BoxDecoration(
-                color: const Color(0xFFF5F7FA),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: const Center(
-                child: Text(
-                  "Lihat Progress Kamu →",
-                  style: TextStyle(
-                    color: Color(0xFF1565C0),
-                    fontWeight: FontWeight.w600,
-                    fontSize: 15,
-                  ),
+              child: const Text(
+                "Lihat Progress Kamu →",
+                style: TextStyle(
+                  color: Color(0xFF1565C0),
+                  fontWeight: FontWeight.w600,
+                  fontSize: 15,
                 ),
               ),
             ),
           ),
 
-          const SizedBox(height: 20),
+          const SizedBox(height: 16),
 
-          // Kompetensi List
+          // Card kompetensi
           _buildCompetencyItem(
             title: "Implementasi Penggunaan Postman",
             status: "Approved",
             statusColor: Colors.green,
           ),
+
           const SizedBox(height: 12),
+
           _buildCompetencyItem(
             title: "Project Akhir : Web Management",
             status: "Approved",
@@ -570,17 +670,24 @@ class DashboardLogin extends StatelessWidget {
           const SizedBox(height: 16),
 
           // Lihat semua kompetensi
-          InkWell(
+          GestureDetector(
+            behavior: HitTestBehavior.opaque,
             onTap: () {
-              // Navigasi ke semua kompetensi
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const Kompetensi()),
+              );
             },
-            child: const Center(
-              child: Text(
-                "Lihat semua Kompetensi →",
-                style: TextStyle(
-                  color: Color(0xFF1565C0),
-                  fontWeight: FontWeight.w500,
-                  fontSize: 14,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              child: Center(
+                child: const Text(
+                  "Lihat semua Kompetensi →",
+                  style: TextStyle(
+                    color: Color(0xFF1565C0),
+                    fontWeight: FontWeight.w500,
+                    fontSize: 14,
+                  ),
                 ),
               ),
             ),
@@ -623,6 +730,45 @@ class DashboardLogin extends StatelessWidget {
             fontSize: 24,
             fontWeight: FontWeight.bold,
             color: Colors.black87,
+          ),
+        ),
+      ],
+    );
+  }
+
+  // Added: _progressRow helper
+  Widget _progressRow({
+    required Color color,
+    required String label,
+    required String value,
+  }) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Row(
+          children: [
+            Container(
+              width: 12,
+              height: 12,
+              decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+            ),
+            const SizedBox(width: 10),
+            Text(
+              label,
+              style: const TextStyle(
+                fontSize: 15,
+                color: Colors.black87,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ],
+        ),
+        Text(
+          value,
+          style: const TextStyle(
+            fontSize: 16,
+            color: Colors.black87,
+            fontWeight: FontWeight.w600,
           ),
         ),
       ],
@@ -679,10 +825,9 @@ class DashboardLogin extends StatelessWidget {
         ],
       ),
     );
-
-
   }
 }
+
 // ignore: unused_element
 Widget _buildFooter() {
   return Container(
@@ -692,11 +837,29 @@ Widget _buildFooter() {
     child: const Center(
       child: Text(
         '© GEN-28 PPLG SMK Wikrama Bogor. All Rights Reserved.',
-        style: TextStyle(
-          fontSize: 12,
-          color: Colors.white,
-        ),
+        style: TextStyle(fontSize: 12, color: Colors.white),
       ),
+    ),
+  );
+}
+
+PopupMenuItem<String> _menuItem(IconData icon, String title) {
+  return PopupMenuItem<String>(
+    value: title,
+    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+    child: Row(
+      children: [
+        Icon(icon, size: 20, color: const Color(0xFF4C5767)),
+        const SizedBox(width: 16),
+        Text(
+          title,
+          style: const TextStyle(
+            fontSize: 15,
+            color: Color(0xFF4C5767),
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ],
     ),
   );
 }

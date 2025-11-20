@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dashboard.login.dart';
+import 'Kompetensi.dart';
+import 'login.dart';
+import 'following.dart';
+
 
 class AccountSettings extends StatelessWidget {
   const AccountSettings({super.key});
@@ -28,61 +32,141 @@ class AccountSettings extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
 
-      appBar: AppBar(
-        elevation: 1,
+       appBar: AppBar(
         backgroundColor: Colors.white,
-        surfaceTintColor: Colors.white,
-        shadowColor: Colors.black.withOpacity(0.1),
-
+        elevation: 0,
+        toolbarHeight: 65,
+        automaticallyImplyLeading: false,
         titleSpacing: 0,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.home_outlined,
-            color: Color(0xFF64748B),
-          ),
-          onPressed: () {
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(builder: (context) => DashboardLogin()),
-              (Route<dynamic> route) => false,
-            );
-          },
-        ),
-
-        actions: [
-          Row(
+        title: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Row(
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Muhamad Fadlan",
-                    style: GoogleFonts.inter(
-                      fontSize: 14,
-                      color: Colors.black87,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  Text(
-                    "PPLG XII-5",
-                    style: GoogleFonts.inter(
-                      fontSize: 12,
-                      color: Colors.grey,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(width: 10),
-
-              CircleAvatar(
-                radius: 20,
-                backgroundImage: AssetImage("assets/images/me.jpg"),
-              ),
+              Icon(Icons.home, size: 22, color: const Color(0xFF4C5767)),
               const SizedBox(width: 16),
-            ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Text(
+                      "Nama Siswa",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black87,
+                      ),
+                    ),
+                    SizedBox(height: 2),
+                    Text(
+                      "Rombel Siswa",
+                      style: TextStyle(fontSize: 13, color: Color(0xFF6F7A87)),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 12),
+                GestureDetector(
+                onTap: () async {
+                  final RenderBox button =
+                    context.findRenderObject() as RenderBox;
+                  final RenderBox overlay =
+                    Overlay.of(context).context.findRenderObject()
+                      as RenderBox;
+
+                  final position = RelativeRect.fromRect(
+                  Rect.fromPoints(
+                    button.localToGlobal(Offset.zero, ancestor: overlay),
+                    button.localToGlobal(
+                    button.size.bottomRight(Offset.zero),
+                    ancestor: overlay,
+                    ),
+                  ),
+                  Offset.zero & overlay.size,
+                  );
+
+                  final selected = await showMenu<String>(
+                  context: context,
+                  position: position.shift(const Offset(50, 55)),
+                  elevation: 8,
+                  color: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  items: <PopupMenuEntry<String>>[
+                    _menuItem(Icons.home_outlined, "Dashboard"),
+                    _menuItem(Icons.person_outline, "Profil"),
+                    _menuItem(Icons.explore_outlined, "Jelajahi"),
+
+                    const PopupMenuDivider(),
+
+                    _menuItem(Icons.book_outlined, "Jurnal Pembiasaan"),
+                    _menuItem(
+                    Icons.person_search_outlined,
+                    "Permintaan Saksi",
+                    ),
+                    _menuItem(Icons.bar_chart_outlined, "Progress"),
+                    _menuItem(Icons.error_outline, "Catatan Sikap"),
+
+                    const PopupMenuDivider(),
+
+                    _menuItem(Icons.menu_book_outlined, "Panduan Penggunaan"),
+                    _menuItem(Icons.settings_outlined, "Pengaturan Akun"),
+                    _menuItem(Icons.logout, "Log Out"),
+                  ],
+                  );
+
+                  if (selected == null) return;
+
+                  switch (selected) {
+                  case "Dashboard":
+                    Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DashboardLogin()),
+                    );
+                    break;
+                  case "Progress":
+                    Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Kompetensi()),
+                    );
+                    break;
+                  case "Pengaturan Akun":
+                    Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AccountSettings()),
+                    );
+                    break;
+                  case "Log Out":
+                    Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginPage()),
+                    (route) => false,
+                    );
+                    break;
+                  case "Permintaan Saksi":
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Following()),
+                    );
+                    break;
+                  default:
+                    ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text("$selected belum tersedia")),
+                    );
+                  }
+                },
+                child: const CircleAvatar(
+                  radius: 20,
+                  backgroundImage: NetworkImage(
+                  "https://via.placeholder.com/150",
+                  ),
+                ),
+                ),],
           ),
-        ],
+        ),
       ),
 
       body: Padding(
@@ -248,4 +332,25 @@ class AccountSettings extends StatelessWidget {
       ),
     );
   }
+}
+
+PopupMenuItem<String> _menuItem(IconData icon, String title) {
+  return PopupMenuItem<String>(
+    value: title,
+    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+    child: Row(
+      children: [
+        Icon(icon, size: 20, color: const Color(0xFF4C5767)),
+        const SizedBox(width: 16),
+        Text(
+          title,
+          style: const TextStyle(
+            fontSize: 15,
+            color: Color(0xFF4C5767),
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ],
+    ),
+  );
 }
