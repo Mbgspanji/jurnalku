@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'dashboard.login.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:jurnalku/account-settings.dart';
+import 'package:jurnalku/explore.dart';
+import 'package:jurnalku/following.dart';
+import 'package:jurnalku/dashboard.login.dart';
+import 'package:jurnalku/profile_overview.dart';
+import 'package:jurnalku/profile_portofolio.dart';
+import 'package:jurnalku/profile_sertifikat.dart';
 import 'Kompetensi.dart';
 import 'login.dart';
-import 'following.dart';
-
 
 class AccountSettings extends StatelessWidget {
   const AccountSettings({super.key});
@@ -120,38 +125,56 @@ class AccountSettings extends StatelessWidget {
 
                   switch (selected) {
                   case "Dashboard":
-                    Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => DashboardLogin()),
-                    );
-                    break;
-                  case "Progress":
-                    Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Kompetensi()),
-                    );
-                    break;
-                  case "Pengaturan Akun":
-                    Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => AccountSettings()),
-                    );
-                    break;
-                  case "Log Out":
-                    Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (context) => LoginPage()),
-                    (route) => false,
-                    );
-                    break;
-                  case "Permintaan Saksi":
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Following()),
-                    );
-                    break;
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DashboardLogin(),
+                        ),
+                      );
+                      break;
+                    case "Profil":
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProfileOverview(),
+                        ),
+                      );
+                      break;
+                    case "Jelajahi":
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Explore(),
+                        ),
+                      );
+                      break;
+                    case "Progress":
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Kompetensi()),
+                      );
+                      break;
+                    case "Pengaturan Akun":
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AccountSettings(),
+                        ),
+                      );
+                      break;
+                    case "Log Out":
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginPage()),
+                        (route) => false,
+                      );
+                      break;
+                    case "Permintaan Saksi":
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Following()),
+                      );
+                      break;
                   default:
                     ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text("$selected belum tersedia")),

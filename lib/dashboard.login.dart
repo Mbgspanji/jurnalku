@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:jurnalku/account-settings.dart';
+import 'package:jurnalku/explore.dart';
 import 'package:jurnalku/following.dart';
+import 'package:jurnalku/dashboard.login.dart';
+import 'package:jurnalku/profile_overview.dart';
+import 'package:jurnalku/profile_portofolio.dart';
+import 'package:jurnalku/profile_sertifikat.dart';
 import 'Kompetensi.dart';
 import 'login.dart';
 
@@ -105,6 +111,22 @@ class DashboardLogin extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) => DashboardLogin(),
+                        ),
+                      );
+                      break;
+                    case "Profil":
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProfileOverview(),
+                        ),
+                      );
+                      break;
+                    case "Jelajahi":
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Explore(),
                         ),
                       );
                       break;
