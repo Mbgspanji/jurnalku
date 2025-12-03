@@ -11,6 +11,9 @@ import 'package:jurnalku/profile_portofolio.dart';
 import 'package:jurnalku/profile_sertifikat.dart';
 import 'Kompetensi.dart';
 import 'login.dart';
+import 'package:jurnalku/catatan-sikap.dart';
+import 'package:jurnalku/panduan-pengguna.dart';
+
 
 class DashboardLogin extends StatelessWidget {
   const DashboardLogin({super.key});
@@ -134,6 +137,18 @@ class DashboardLogin extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => Kompetensi()),
+                      );
+                      break;
+                    case "Catatan Sikap":
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => CatatanSikap()),
+                      );
+                      break;
+                    case "Panduan Penggunaan":
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Panduan()),
                       );
                       break;
                     case "Pengaturan Akun":

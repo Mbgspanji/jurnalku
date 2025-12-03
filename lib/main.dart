@@ -3,6 +3,7 @@ import 'dashboard.login.dart';
 import 'account-settings.dart';
 import 'login.dart';
 import 'following.dart';
+import 'catatan-sikap.dart';
 
 void main() {
   runApp(const MyApp());
