@@ -91,13 +91,15 @@ class SidebarMenu extends StatelessWidget {
 // ITEM DROPDOWN
 class _DropdownItem extends StatelessWidget {
   final String label;
-  const _DropdownItem(this.label, {super.key});
+  const _DropdownItem(this.label, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(label,
-          style: const TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+      title: Text(
+        label,
+        style: const TextStyle(fontSize: 14, color: Color(0xFF6B7280)),
+      ),
       onTap: () {},
       dense: true,
       visualDensity: VisualDensity.compact,

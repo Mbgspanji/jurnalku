@@ -24,10 +24,7 @@ class AccountSettings extends StatelessWidget {
       ),
       child: Text(
         text,
-        style: GoogleFonts.inter(
-          fontSize: 14,
-          color: Colors.black87,
-        ),
+        style: GoogleFonts.inter(fontSize: 14, color: Colors.black87),
       ),
     );
   }
@@ -198,7 +195,6 @@ class AccountSettings extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-
               Text(
                 "Account Settings",
                 style: GoogleFonts.inter(
@@ -256,48 +252,48 @@ class AccountSettings extends StatelessWidget {
 
                     const SizedBox(height: 20),
 
-                    Center(
-                      child: Column(
-                        children: [
-                          Stack(
-                            alignment: Alignment.bottomRight,
-                            children: [
-                              CircleAvatar(
-                                radius: 55,
-                                backgroundImage: AssetImage("assets/images/me.jpg"),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Stack(
+                          alignment: Alignment.bottomRight,
+                          children: [
+                            const CircleAvatar(
+                              radius: 55,
+                              backgroundImage: AssetImage(
+                                "assets/images/me.jpg",
                               ),
-
-                              Container(
-                                padding: const EdgeInsets.all(6),
-                                decoration: const BoxDecoration(
-                                  color: Color(0xFF003B95),
-                                  shape: BoxShape.circle,
-                                ),
-                                child: const Icon(
-                                  Icons.camera_alt,
-                                  color: Colors.white,
-                                  size: 18,
-                                ),
-                              ),
-                            ],
-                          ),
-
-                          const SizedBox(height: 10),
-
-                          Text(
-                            "Klik untuk mengubah foto",
-                            style: GoogleFonts.inter(
-                              fontSize: 12,
-                              color: Colors.grey,
                             ),
+
+                            Container(
+                              padding: const EdgeInsets.all(6),
+                              decoration: const BoxDecoration(
+                                color: Color(0xFF003B95),
+                                shape: BoxShape.circle,
+                              ),
+                              child: const Icon(
+                                Icons.camera_alt_outlined,
+                                color: Colors.white,
+                                size: 18,
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        const SizedBox(height: 10),
+
+                        Text(
+                          "Klik untuk mengubah foto",
+                          style: GoogleFonts.inter(
+                            fontSize: 12,
+                            color: Colors.grey,
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
 
                     const SizedBox(height: 20),
 
-                    // FIELD NAMA
                     Text(
                       "Nama",
                       style: GoogleFonts.inter(
@@ -310,7 +306,6 @@ class AccountSettings extends StatelessWidget {
 
                     const SizedBox(height: 16),
 
-                    // FIELD NIS
                     Text(
                       "NIS",
                       style: GoogleFonts.inter(
@@ -323,7 +318,6 @@ class AccountSettings extends StatelessWidget {
 
                     const SizedBox(height: 16),
 
-                    // FIELD ROMBEL
                     Text(
                       "Rombel",
                       style: GoogleFonts.inter(
@@ -336,7 +330,6 @@ class AccountSettings extends StatelessWidget {
 
                     const SizedBox(height: 16),
 
-                    // FIELD RAYON
                     Text(
                       "Rayon",
                       style: GoogleFonts.inter(
@@ -346,6 +339,97 @@ class AccountSettings extends StatelessWidget {
                     ),
                     const SizedBox(height: 6),
                     fieldBox("Cia 5"),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 20),
+              Container(
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: Colors.black12),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Judul
+                    Text(
+                      "Ubah Kata Sandi",
+                      style: GoogleFonts.inter(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+
+                    const SizedBox(height: 20),
+
+                    Text(
+                      "Kata Sandi Lama",
+                      style: GoogleFonts.inter(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    fieldBox("Masukan Password"),
+
+                    const SizedBox(height: 4),
+                    Text(
+                      "Masukkan kata sandi lama anda",
+                      style: GoogleFonts.inter(
+                        fontSize: 12,
+                        color: Colors.grey,
+                      ),
+                    ),
+
+                    const SizedBox(height: 16),
+
+                    Text(
+                      "Kata Sandi Baru",
+                      style: GoogleFonts.inter(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    fieldBox("Masukan Password"),
+
+                    const SizedBox(height: 25),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                            padding: EdgeInsets.all(20),
+                            backgroundColor: const Color.fromARGB(
+                              255,
+                              1,
+                              53,
+                              144,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadiusGeometry.circular(5),
+                            ),
+                          ),
+                          child: Row(
+                            children: [
+                              SizedBox(width: 10),
+                              Text(
+                                "Simpan Perubahan",
+                                style: GoogleFonts.inter(
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
