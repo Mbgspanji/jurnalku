@@ -657,7 +657,12 @@ class DashboardLogin extends StatelessWidget {
 
           // Tombol Lihat Progress Kamu
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const Kompetensi()),
+              );
+            },
             borderRadius: BorderRadius.circular(12),
             child: Container(
               padding: const EdgeInsets.symmetric(vertical: 12),
@@ -719,7 +724,6 @@ class DashboardLogin extends StatelessWidget {
     );
   }
 
-  // Helper: Status Item
   Widget _buildStatusItem({
     required Color color,
     required String label,
@@ -758,7 +762,7 @@ class DashboardLogin extends StatelessWidget {
     );
   }
 
-  // Added: _progressRow helper
+
   Widget _progressRow({
     required Color color,
     required String label,
@@ -797,7 +801,6 @@ class DashboardLogin extends StatelessWidget {
     );
   }
 
-  // Helper: Competency Item
   Widget _buildCompetencyItem({
     required String title,
     required String status,
@@ -850,7 +853,6 @@ class DashboardLogin extends StatelessWidget {
   }
 }
 
-// ignore: unused_element
 Widget _buildFooter() {
   return Container(
     width: double.infinity,
