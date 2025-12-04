@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 
 class SidebarMenu extends StatelessWidget {
-  const SidebarMenu({Key? key}) : super(key: key);
+  const SidebarMenu({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +91,7 @@ class SidebarMenu extends StatelessWidget {
 // ITEM DROPDOWN
 class _DropdownItem extends StatelessWidget {
   final String label;
-  const _DropdownItem(this.label, {Key? key}) : super(key: key);
+  const _DropdownItem(this.label);
 
   @override
   Widget build(BuildContext context) {

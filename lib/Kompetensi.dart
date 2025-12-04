@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:jurnalku/account-settings.dart';
 import 'package:jurnalku/explore.dart';
 import 'package:jurnalku/following.dart';
@@ -10,6 +11,9 @@ import 'package:jurnalku/profile_portofolio.dart';
 import 'package:jurnalku/profile_sertifikat.dart';
 import 'Kompetensi.dart';
 import 'login.dart';
+import 'package:jurnalku/catatan-sikap.dart';
+import 'package:jurnalku/panduan-pengguna.dart';
+
 
 class Kompetensi extends StatefulWidget {
   const Kompetensi({super.key});
@@ -138,6 +142,18 @@ class _KompetensiState extends State<Kompetensi> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => Kompetensi()),
+                      );
+                      break;
+                    case "Catatan Sikap":
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => CatatanSikap()),
+                      );
+                      break;
+                    case "Panduan Penggunaan":
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Panduan()),
                       );
                       break;
                     case "Pengaturan Akun":
