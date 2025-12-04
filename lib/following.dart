@@ -27,19 +27,19 @@ class _FollowingState extends State<Following> {
       "nama": "Ahmad Rizky",
       "kelas": "XII RPL 1",
       "tanggal": "20 Nov 2025",
-      "foto": "https://via.placeholder.com/150"
+      "foto": "https://via.placeholder.com/150",
     },
     {
       "nama": "Siti Aminah",
       "kelas": "XI TKJ 2",
       "tanggal": "20 Nov 2025",
-      "foto": "https://via.placeholder.com/150"
+      "foto": "https://via.placeholder.com/150",
     },
     {
       "nama": "Budi Santoso",
       "kelas": "X DKV 3",
       "tanggal": "19 Nov 2025",
-      "foto": "https://via.placeholder.com/150"
+      "foto": "https://via.placeholder.com/150",
     },
   ];
 
@@ -85,9 +85,9 @@ class _FollowingState extends State<Following> {
                 onTap: () async {
                   final RenderBox button =
                       context.findRenderObject() as RenderBox;
-                  final RenderBox overlay = Overlay.of(context)
-                      .context
-                      .findRenderObject() as RenderBox;
+                  final RenderBox overlay =
+                      Overlay.of(context).context.findRenderObject()
+                          as RenderBox;
 
                   final position = RelativeRect.fromRect(
                     Rect.fromPoints(
@@ -133,25 +133,46 @@ class _FollowingState extends State<Following> {
                   // Navigasi Sederhana (Sesuaikan Route Anda)
                   switch (selected) {
                     case "Dashboard":
-                      Navigator.push(context, MaterialPageRoute(builder: (c) => DashboardLogin()));
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (c) => DashboardLogin()),
+                      );
                       break;
                     case "Profil":
-                      Navigator.push(context, MaterialPageRoute(builder: (c) => ProfileOverview()));
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (c) => ProfileOverview()),
+                      );
                       break;
                     case "Jelajahi":
-                       Navigator.push(context, MaterialPageRoute(builder: (c) => Explore()));
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (c) => Explore()),
+                      );
                       break;
                     case "Progress":
-                       Navigator.push(context, MaterialPageRoute(builder: (c) => Kompetensi()));
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (c) => Kompetensi()),
+                      );
                       break;
                     case "Catatan Sikap":
-                       Navigator.push(context, MaterialPageRoute(builder: (c) => CatatanSikap()));
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (c) => CatatanSikap()),
+                      );
                       break;
                     case "Panduan Penggunaan":
-                       Navigator.push(context, MaterialPageRoute(builder: (c) => Panduan()));
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (c) => Panduan()),
+                      );
                       break;
                     case "Pengaturan Akun":
-                       Navigator.push(context, MaterialPageRoute(builder: (c) => AccountSettings()));
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (c) => AccountSettings()),
+                      );
                       break;
                     case "Log Out":
                       Navigator.pushAndRemoveUntil(
@@ -161,7 +182,7 @@ class _FollowingState extends State<Following> {
                       );
                       break;
                     case "Permintaan Saksi":
-                       // Sudah di halaman ini
+                      // Sudah di halaman ini
                       break;
                     default:
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -202,7 +223,7 @@ class _FollowingState extends State<Following> {
               const SizedBox(height: 20),
 
               // KOTAK TANGGAL
-              Container(
+                Container(
                 width: double.infinity,
                 padding: const EdgeInsets.symmetric(
                   vertical: 12,
@@ -212,13 +233,52 @@ class _FollowingState extends State<Following> {
                   color: const Color(0xFFE8F1FF),
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: const Text(
-                  "Thursday, 20 November 2025",
-                  style: TextStyle(
+                child: Builder(
+                  builder: (context) {
+                  final now = DateTime.now();
+                  String _weekdayName(int wd) {
+                    const names = [
+                    'Monday',
+                    'Tuesday',
+                    'Wednesday',
+                    'Thursday',
+                    'Friday',
+                    'Saturday',
+                    'Sunday'
+                    ];
+                    return names[wd - 1];
+                  }
+
+                  String _monthName(int m) {
+                    const months = [
+                    'January',
+                    'February',
+                    'March',
+                    'April',
+                    'May',
+                    'June',
+                    'July',
+                    'August',
+                    'September',
+                    'October',
+                    'November',
+                    'December'
+                    ];
+                    return months[m - 1];
+                  }
+
+                  final formattedDate =
+                    "${_weekdayName(now.weekday)}, ${now.day} ${_monthName(now.month)} ${now.year}";
+
+                  return Text(
+                    formattedDate,
+                    style: const TextStyle(
                     fontSize: 15,
                     color: Color(0xFF1D4ED8),
                     fontWeight: FontWeight.w600,
-                  ),
+                    ),
+                  );
+                  },
                 ),
               ),
               const SizedBox(height: 20),
@@ -261,7 +321,8 @@ class _FollowingState extends State<Following> {
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemCount: listPermintaan.length,
-                  separatorBuilder: (context, index) => const SizedBox(height: 12),
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(height: 12),
                   itemBuilder: (context, index) {
                     final data = listPermintaan[index];
                     return Container(
@@ -278,9 +339,9 @@ class _FollowingState extends State<Following> {
                         ],
                       ),
                       child: Theme(
-                        data: Theme.of(context).copyWith(
-                          dividerColor: Colors.transparent,
-                        ),
+                        data: Theme.of(
+                          context,
+                        ).copyWith(dividerColor: Colors.transparent),
                         child: ExpansionTile(
                           tilePadding: const EdgeInsets.symmetric(
                             horizontal: 16,
@@ -301,7 +362,10 @@ class _FollowingState extends State<Following> {
                           subtitle: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(data['kelas']!, style: const TextStyle(fontSize: 13)),
+                              Text(
+                                data['kelas']!,
+                                style: const TextStyle(fontSize: 13),
+                              ),
                               const SizedBox(height: 2),
                               Text(
                                 data['tanggal']!,
@@ -317,21 +381,31 @@ class _FollowingState extends State<Following> {
                               padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
                               child: Row(
                                 children: [
-                                
                                   Expanded(
                                     child: OutlinedButton(
                                       onPressed: () {
-                                        
-                                        ScaffoldMessenger.of(context).showSnackBar(
-                                          SnackBar(content: Text("Menolak ${data['nama']}")),
+                                        ScaffoldMessenger.of(
+                                          context,
+                                        ).showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              "Menolak ${data['nama']}",
+                                            ),
+                                          ),
                                         );
                                       },
                                       style: OutlinedButton.styleFrom(
                                         foregroundColor: Colors.red,
-                                        side: const BorderSide(color: Colors.red),
-                                        padding: const EdgeInsets.symmetric(vertical: 12),
+                                        side: const BorderSide(
+                                          color: Colors.red,
+                                        ),
+                                        padding: const EdgeInsets.symmetric(
+                                          vertical: 12,
+                                        ),
                                         shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(8),
+                                          borderRadius: BorderRadius.circular(
+                                            8,
+                                          ),
                                         ),
                                       ),
                                       child: const Text("Tolak"),
@@ -341,17 +415,27 @@ class _FollowingState extends State<Following> {
                                   Expanded(
                                     child: ElevatedButton(
                                       onPressed: () {
-                                        ScaffoldMessenger.of(context).showSnackBar(
-                                          SnackBar(content: Text("Menerima ${data['nama']}")),
+                                        ScaffoldMessenger.of(
+                                          context,
+                                        ).showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              "Menerima ${data['nama']}",
+                                            ),
+                                          ),
                                         );
                                       },
                                       style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.green, 
-                                        foregroundColor: Colors.white, 
-                                        padding: const EdgeInsets.symmetric(vertical: 12),
+                                        backgroundColor: Colors.green,
+                                        foregroundColor: Colors.white,
+                                        padding: const EdgeInsets.symmetric(
+                                          vertical: 12,
+                                        ),
                                         elevation: 0,
                                         shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(8),
+                                          borderRadius: BorderRadius.circular(
+                                            8,
+                                          ),
                                         ),
                                       ),
                                       child: const Text("Terima"),
@@ -366,8 +450,8 @@ class _FollowingState extends State<Following> {
                     );
                   },
                 ),
-                
-                const SizedBox(height: 40),
+
+              const SizedBox(height: 40),
             ],
           ),
         ),
@@ -375,7 +459,6 @@ class _FollowingState extends State<Following> {
     );
   }
 }
-
 
 PopupMenuItem<String> _menuItem(IconData icon, String title) {
   return PopupMenuItem<String>(
