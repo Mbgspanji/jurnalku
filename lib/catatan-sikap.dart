@@ -14,8 +14,26 @@ import 'login.dart';
 import 'package:jurnalku/catatan-sikap.dart';
 import 'package:jurnalku/panduan-pengguna.dart';
 
-class CatatanSikap extends StatelessWidget {
+class CatatanSikap extends StatefulWidget {
   const CatatanSikap({super.key});
+
+  @override
+  State<CatatanSikap> createState() => _CatatanSikapState();
+}
+
+class _CatatanSikapState extends State<CatatanSikap> {
+  final List<Map<String, dynamic>> catatanData = [
+    {
+      "judul": "Catatan Sikap",
+      "no": "-",
+      "kategori": "-",
+      "catatan": "-",
+      "status": "-",
+      "dilaporkan": "-",
+      "updateTerakhir": "-",
+      "aksi": "-",
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -213,6 +231,8 @@ class CatatanSikap extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 20),
+
+              // PERHATIAN
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
@@ -228,7 +248,6 @@ class CatatanSikap extends StatelessWidget {
                       color: Color(0xFFD97706),
                       size: 21,
                     ),
-
                     SizedBox(width: 12),
                     Expanded(
                       child: Column(
@@ -250,7 +269,6 @@ class CatatanSikap extends StatelessWidget {
                               fontSize: 14,
                               color: Color(0xFFB45309),
                               height: 1.5,
-                              fontWeight: FontWeight.w400,
                             ),
                           ),
                         ],
@@ -260,281 +278,77 @@ class CatatanSikap extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 25),
-              Container(
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black12,
-                      blurRadius: 6,
-                      offset: Offset(0, 3),
-                    ),
-                  ],
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    // Bagian Kiri (Teks)
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Total Catatan",
-                          style: GoogleFonts.inter(
-                            fontSize: 15,
-                            color: const Color(0xFF4B5563),
-                          ),
-                        ),
-                        const SizedBox(height: 5),
-                        Text(
-                          "0",
-                          style: GoogleFonts.inter(
-                            fontSize: 32,
-                            fontWeight: FontWeight.bold,
-                            color: const Color(0xFF111827),
-                          ),
-                        ),
-                      ],
-                    ),
 
-                    // Bagian Kanan (Icon bulat biru muda + icon dokumen)
-                    Container(
-                      width: 48,
-                      height: 48,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: const Color(
-                          0xFFDBEAFE,
-                        ), // Biru muda seperti screenshot
-                      ),
-                      child: Center(
-                        child: SvgPicture.asset(
-                          "assets/icons/document.svg",
-                          width: 24,
-                          height: 24,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+              // STATISTIK
+              containerStat(
+                "Total Catatan",
+                "0",
+                "assets/icons/document.svg",
+                const Color(0xFFDBEAFE),
               ),
               SizedBox(height: 25),
-              Container(
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black12,
-                      blurRadius: 6,
-                      offset: Offset(0, 3),
-                    ),
-                  ],
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    // Bagian Kiri (Teks)
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Dalam Perbaikan",
-                          style: GoogleFonts.inter(
-                            fontSize: 15,
-                            color: const Color(0xFF4B5563),
-                          ),
-                        ),
-                        const SizedBox(height: 5),
-                        Text(
-                          "0",
-                          style: GoogleFonts.inter(
-                            fontSize: 32,
-                            fontWeight: FontWeight.bold,
-                            color: const Color(0xFF111827),
-                          ),
-                        ),
-                      ],
-                    ),
 
-                    // Bagian Kanan (Icon bulat biru muda + icon dokumen)
-                    Container(
-                      width: 48,
-                      height: 48,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: const Color(
-                          0xFFFEF9C3,
-                        ), // Biru muda seperti screenshot
-                      ),
-                      child: Center(
-                        child: SvgPicture.asset(
-                          "assets/icons/thunder.svg",
-                          width: 24,
-                          height: 24,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+              containerStat(
+                "Dalam Perbaikan",
+                "0",
+                "assets/icons/thunder.svg",
+                const Color(0xFFFEF9C3),
               ),
               SizedBox(height: 25),
-              Container(
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black12,
-                      blurRadius: 6,
-                      offset: Offset(0, 3),
-                    ),
-                  ],
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    // Bagian Kiri (Teks)
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Sudah Berubah",
-                          style: GoogleFonts.inter(
-                            fontSize: 15,
-                            color: const Color(0xFF4B5563),
-                          ),
-                        ),
-                        const SizedBox(height: 5),
-                        Text(
-                          "0",
-                          style: GoogleFonts.inter(
-                            fontSize: 32,
-                            fontWeight: FontWeight.bold,
-                            color: const Color(0xFF111827),
-                          ),
-                        ),
-                      ],
-                    ),
 
-                    // Bagian Kanan (Icon bulat biru muda + icon dokumen)
-                    Container(
-                      width: 48,
-                      height: 48,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Color(
-                          0xFFDCFCE7,
-                        ), // Biru muda seperti screenshot
-                      ),
-                      child: Center(
-                        child: SvgPicture.asset(
-                          "assets/icons/check-ring-round.svg",
-                          width: 24,
-                          height: 24,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+              containerStat(
+                "Sudah Berubah",
+                "0",
+                "assets/icons/check-ring-round.svg",
+                const Color(0xFFDCFCE7),
               ),
               SizedBox(height: 30),
 
-              // ============================
-              // TABEL CATATAN SIKAP (SCROLL HORIZONTAL)
-              // ============================
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black12,
-                      blurRadius: 6,
-                      offset: Offset(0, 3),
+              ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: catatanData.length,
+                itemBuilder: (context, index) {
+                  final item = catatanData[index];
+
+                  return Container(
+                    margin: EdgeInsets.only(bottom: 20),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(16),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black12,
+                          blurRadius: 6,
+                          offset: Offset(0, 2),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Column(
-                    children: [
-                      // HEADER
-                      Container(
-                        width:
-                            1000, // Biar tabel lebih lebar dan bisa di-scroll
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 14,
-                          horizontal: 12,
-                        ),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFF9FAFB),
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(12),
-                            topRight: Radius.circular(12),
-                          ),
-                          border: Border(
-                            bottom: BorderSide(color: Colors.grey, width: 0.4),
-                          ),
-                        ),
-                        child: Row(
-                          children: [
-                            headerCell("NO", flex: 1),
-                            headerCell("KATEGORI", flex: 2),
-                            headerCell("CATATAN", flex: 2),
-                            headerCell("STATUS", flex: 2),
-                            headerCell("DILAPORKAN", flex: 2),
-                            headerCell("UPDATE TERAKHIR", flex: 2),
-                            headerCell("AKSI", flex: 1),
-                          ],
+                    child: ExpansionTile(
+                      tilePadding: EdgeInsets.symmetric(horizontal: 20),
+                      childrenPadding: EdgeInsets.fromLTRB(20, 10, 20, 20),
+                      expandedAlignment: Alignment.centerLeft,
+                      expandedCrossAxisAlignment: CrossAxisAlignment.start,
+                      title: Text(
+                        item["judul"],
+                        style: GoogleFonts.inter(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black87,
                         ),
                       ),
-
-                      // BODY KOSONG
-                      Container(
-                        width: 1000,
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 40,
-                          horizontal: 16,
-                        ),
-                        alignment: Alignment.center,
-                        child: Column(
-                          children: [
-                            SvgPicture.asset(
-                              "assets/icons/check-ring-round (1).svg",
-                              width: 80,
-                            ),
-                            SizedBox(height: 12),
-                            Text(
-                              "Tidak ada catatan",
-                              style: GoogleFonts.inter(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w600,
-                                color: const Color(0xFF4B5563),
-                              ),
-                            ),
-                            SizedBox(height: 4),
-                            Text(
-                              "Belum ada catatan sikap yang masuk.",
-                              style: GoogleFonts.inter(
-                                fontSize: 13,
-                                color: Colors.grey[600],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                      children: [
+                        _rowInfo("No", item["no"]),
+                        _rowInfo("Kategori", item["kategori"]),
+                        _rowInfo("Catatan", item["catatan"]),
+                        _rowInfo("Status", item["status"]),
+                        _rowInfo("Dilaporkan", item["dilaporkan"]),
+                        _rowInfo("Update Terakhir", item["updateTerakhir"]),
+                        _rowInfo("Aksi", item["aksi"]),
+                      ],
+                    ),
+                  );
+                },
               ),
             ],
           ),
@@ -543,21 +357,79 @@ class CatatanSikap extends StatelessWidget {
     );
   }
 
-  Widget headerCell(String text, {int flex = 1}) {
-    return Expanded(
-      flex: flex,
-      child: Text(
-        text,
-        style: GoogleFonts.inter(
-          fontSize: 13,
-          fontWeight: FontWeight.w600,
-          color: const Color(0xFF6B7280),
-        ),
+  // Widget untuk statistic box
+  Widget containerStat(String title, String value, String iconPath, Color bg) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(color: Colors.black12, blurRadius: 6, offset: Offset(0, 3)),
+        ],
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: GoogleFonts.inter(
+                  fontSize: 15,
+                  color: const Color(0xFF4B5563),
+                ),
+              ),
+              SizedBox(height: 5),
+              Text(
+                value,
+                style: GoogleFonts.inter(
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                  color: const Color(0xFF111827),
+                ),
+              ),
+            ],
+          ),
+          Container(
+            width: 48,
+            height: 48,
+            decoration: BoxDecoration(shape: BoxShape.circle, color: bg),
+            child: Center(
+              child: SvgPicture.asset(iconPath, width: 24, height: 24),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _rowInfo(String label, String value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 6),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            label,
+            style: GoogleFonts.inter(
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+              color: Colors.black87,
+            ),
+          ),
+          SizedBox(height: 3),
+          Text(
+            value,
+            style: GoogleFonts.inter(fontSize: 14, color: Colors.black54),
+          ),
+          SizedBox(height: 10),
+        ],
       ),
     );
   }
 }
-
 
 PopupMenuItem<String> _menuItem(IconData icon, String title) {
   return PopupMenuItem<String>(
