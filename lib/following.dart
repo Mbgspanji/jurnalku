@@ -14,15 +14,40 @@ import 'login.dart';
 import 'package:jurnalku/catatan-sikap.dart';
 import 'package:jurnalku/panduan-pengguna.dart';
 
-class Following extends StatelessWidget {
+class Following extends StatefulWidget {
   const Following({super.key});
+
+  @override
+  State<Following> createState() => _FollowingState();
+}
+
+class _FollowingState extends State<Following> {
+  final List<Map<String, String>> listPermintaan = [
+    {
+      "nama": "Ahmad Rizky",
+      "kelas": "XII RPL 1",
+      "tanggal": "20 Nov 2025",
+      "foto": "https://via.placeholder.com/150"
+    },
+    {
+      "nama": "Siti Aminah",
+      "kelas": "XI TKJ 2",
+      "tanggal": "20 Nov 2025",
+      "foto": "https://via.placeholder.com/150"
+    },
+    {
+      "nama": "Budi Santoso",
+      "kelas": "X DKV 3",
+      "tanggal": "19 Nov 2025",
+      "foto": "https://via.placeholder.com/150"
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-
-     appBar: AppBar(
+      appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
         toolbarHeight: 65,
@@ -32,7 +57,7 @@ class Following extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Row(
             children: [
-              Icon(Icons.home, size: 22, color: const Color(0xFF4C5767)),
+              const Icon(Icons.home, size: 22, color: Color(0xFF4C5767)),
               const SizedBox(width: 16),
               Expanded(
                 child: Column(
@@ -60,9 +85,9 @@ class Following extends StatelessWidget {
                 onTap: () async {
                   final RenderBox button =
                       context.findRenderObject() as RenderBox;
-                  final RenderBox overlay =
-                      Overlay.of(context).context.findRenderObject()
-                          as RenderBox;
+                  final RenderBox overlay = Overlay.of(context)
+                      .context
+                      .findRenderObject() as RenderBox;
 
                   final position = RelativeRect.fromRect(
                     Rect.fromPoints(
@@ -87,9 +112,7 @@ class Following extends StatelessWidget {
                       _menuItem(Icons.home_outlined, "Dashboard"),
                       _menuItem(Icons.person_outline, "Profil"),
                       _menuItem(Icons.explore_outlined, "Jelajahi"),
-
                       const PopupMenuDivider(),
-
                       _menuItem(Icons.book_outlined, "Jurnal Pembiasaan"),
                       _menuItem(
                         Icons.person_search_outlined,
@@ -97,9 +120,7 @@ class Following extends StatelessWidget {
                       ),
                       _menuItem(Icons.bar_chart_outlined, "Progress"),
                       _menuItem(Icons.error_outline, "Catatan Sikap"),
-
                       const PopupMenuDivider(),
-
                       _menuItem(Icons.menu_book_outlined, "Panduan Penggunaan"),
                       _menuItem(Icons.settings_outlined, "Pengaturan Akun"),
                       _menuItem(Icons.logout, "Log Out"),
@@ -107,70 +128,40 @@ class Following extends StatelessWidget {
                   );
 
                   if (selected == null) return;
+                  if (!mounted) return;
 
+                  // Navigasi Sederhana (Sesuaikan Route Anda)
                   switch (selected) {
                     case "Dashboard":
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => DashboardLogin(),
-                        ),
-                      );
+                      Navigator.push(context, MaterialPageRoute(builder: (c) => DashboardLogin()));
                       break;
                     case "Profil":
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ProfileOverview(),
-                        ),
-                      );
+                      Navigator.push(context, MaterialPageRoute(builder: (c) => ProfileOverview()));
                       break;
                     case "Jelajahi":
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Explore(),
-                        ),
-                      );
+                       Navigator.push(context, MaterialPageRoute(builder: (c) => Explore()));
                       break;
                     case "Progress":
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Kompetensi()),
-                      );
+                       Navigator.push(context, MaterialPageRoute(builder: (c) => Kompetensi()));
                       break;
                     case "Catatan Sikap":
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => CatatanSikap()),
-                      );
+                       Navigator.push(context, MaterialPageRoute(builder: (c) => CatatanSikap()));
                       break;
                     case "Panduan Penggunaan":
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Panduan()),
-                      );
+                       Navigator.push(context, MaterialPageRoute(builder: (c) => Panduan()));
                       break;
                     case "Pengaturan Akun":
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => AccountSettings(),
-                        ),
-                      );
+                       Navigator.push(context, MaterialPageRoute(builder: (c) => AccountSettings()));
                       break;
                     case "Log Out":
                       Navigator.pushAndRemoveUntil(
                         context,
-                        MaterialPageRoute(builder: (context) => LoginPage()),
+                        MaterialPageRoute(builder: (c) => LoginPage()),
                         (route) => false,
                       );
                       break;
                     case "Permintaan Saksi":
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Following()),
-                      );
+                       // Sudah di halaman ini
                       break;
                     default:
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -189,7 +180,6 @@ class Following extends StatelessWidget {
           ),
         ),
       ),
-
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -205,7 +195,6 @@ class Following extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 8),
-
               const Text(
                 "Kelola permintaan menjadi saksi dari siswa lain",
                 style: TextStyle(fontSize: 15, color: Colors.black54),
@@ -214,6 +203,7 @@ class Following extends StatelessWidget {
 
               // KOTAK TANGGAL
               Container(
+                width: double.infinity,
                 padding: const EdgeInsets.symmetric(
                   vertical: 12,
                   horizontal: 16,
@@ -233,83 +223,151 @@ class Following extends StatelessWidget {
               ),
               const SizedBox(height: 20),
 
-              // TABLE HEADER
-              Container(
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border(
-                    bottom: BorderSide(color: Colors.grey.shade300),
+              if (listPermintaan.isEmpty)
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(vertical: 60),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey.shade300),
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    Expanded(
-                      child: Text(
-                        "PENGIRIM",
+                  child: Column(
+                    children: const [
+                      Icon(
+                        Icons.group_outlined,
+                        size: 50,
+                        color: Colors.black38,
+                      ),
+                      SizedBox(height: 16),
+                      Text(
+                        "Belum ada permintaan",
                         style: TextStyle(
-                          fontSize: 13,
+                          fontSize: 17,
                           fontWeight: FontWeight.w600,
-                          color: Colors.black54,
+                          color: Colors.black87,
                         ),
                       ),
-                    ),
-                    Expanded(
-                      child: Text(
-                        "TANGGAL",
+                      SizedBox(height: 6),
+                      Text(
+                        "Belum ada yang mengirim permintaan saksi",
+                        style: TextStyle(fontSize: 14, color: Colors.black54),
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black54,
+                      ),
+                    ],
+                  ),
+                )
+              else
+                ListView.separated(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: listPermintaan.length,
+                  separatorBuilder: (context, index) => const SizedBox(height: 12),
+                  itemBuilder: (context, index) {
+                    final data = listPermintaan[index];
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: Colors.grey.shade200),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.05),
+                            blurRadius: 5,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: Theme(
+                        data: Theme.of(context).copyWith(
+                          dividerColor: Colors.transparent,
+                        ),
+                        child: ExpansionTile(
+                          tilePadding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 8,
+                          ),
+                          leading: CircleAvatar(
+                            radius: 20,
+                            backgroundImage: NetworkImage(data['foto']!),
+                          ),
+                          title: Text(
+                            data['nama']!,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                              color: Colors.black87,
+                            ),
+                          ),
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(data['kelas']!, style: const TextStyle(fontSize: 13)),
+                              const SizedBox(height: 2),
+                              Text(
+                                data['tanggal']!,
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.grey.shade500,
+                                ),
+                              ),
+                            ],
+                          ),
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                              child: Row(
+                                children: [
+                                
+                                  Expanded(
+                                    child: OutlinedButton(
+                                      onPressed: () {
+                                        
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(content: Text("Menolak ${data['nama']}")),
+                                        );
+                                      },
+                                      style: OutlinedButton.styleFrom(
+                                        foregroundColor: Colors.red,
+                                        side: const BorderSide(color: Colors.red),
+                                        padding: const EdgeInsets.symmetric(vertical: 12),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(8),
+                                        ),
+                                      ),
+                                      child: const Text("Tolak"),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 12),
+                                  Expanded(
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(content: Text("Menerima ${data['nama']}")),
+                                        );
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.green, 
+                                        foregroundColor: Colors.white, 
+                                        padding: const EdgeInsets.symmetric(vertical: 12),
+                                        elevation: 0,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(8),
+                                        ),
+                                      ),
+                                      child: const Text("Terima"),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    ),
-                    Expanded(
-                      child: Text(
-                        "KONFIRMASI",
-                        textAlign: TextAlign.end,
-                        style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black54,
-                        ),
-                      ),
-                    ),
-                  ],
+                    );
+                  },
                 ),
-              ),
-
-              // STATE KOSONG
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.symmetric(vertical: 60),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey.shade300),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Column(
-                  children: const [
-                    Icon(Icons.group_outlined, size: 50, color: Colors.black38),
-                    SizedBox(height: 16),
-                    Text(
-                      "Belum ada permintaan",
-                      style: TextStyle(
-                        fontSize: 17,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black87,
-                      ),
-                    ),
-                    SizedBox(height: 6),
-                    Text(
-                      "Belum ada yang mengirim permintaan saksi kepada Anda",
-                      style: TextStyle(fontSize: 14, color: Colors.black54),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ),
-              ),
+                
+                const SizedBox(height: 40),
             ],
           ),
         ),
@@ -317,6 +375,7 @@ class Following extends StatelessWidget {
     );
   }
 }
+
 
 PopupMenuItem<String> _menuItem(IconData icon, String title) {
   return PopupMenuItem<String>(
