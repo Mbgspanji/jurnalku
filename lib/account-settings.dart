@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:jurnalku/account-settings.dart';
+import 'package:jurnalku/catatan-sikap.dart';
 import 'package:jurnalku/explore.dart';
 import 'package:jurnalku/following.dart';
 import 'package:jurnalku/dashboard.login.dart';
 import 'package:jurnalku/profile_overview.dart';
 import 'package:jurnalku/profile_portofolio.dart';
 import 'package:jurnalku/profile_sertifikat.dart';
+import 'package:jurnalku/panduan-pengguna.dart';
 import 'Kompetensi.dart';
 import 'login.dart';
 
@@ -68,60 +70,60 @@ class AccountSettings extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 12),
-                GestureDetector(
+              GestureDetector(
                 onTap: () async {
                   final RenderBox button =
-                    context.findRenderObject() as RenderBox;
+                      context.findRenderObject() as RenderBox;
                   final RenderBox overlay =
-                    Overlay.of(context).context.findRenderObject()
-                      as RenderBox;
+                      Overlay.of(context).context.findRenderObject()
+                          as RenderBox;
 
                   final position = RelativeRect.fromRect(
-                  Rect.fromPoints(
-                    button.localToGlobal(Offset.zero, ancestor: overlay),
-                    button.localToGlobal(
-                    button.size.bottomRight(Offset.zero),
-                    ancestor: overlay,
+                    Rect.fromPoints(
+                      button.localToGlobal(Offset.zero, ancestor: overlay),
+                      button.localToGlobal(
+                        button.size.bottomRight(Offset.zero),
+                        ancestor: overlay,
+                      ),
                     ),
-                  ),
-                  Offset.zero & overlay.size,
+                    Offset.zero & overlay.size,
                   );
 
                   final selected = await showMenu<String>(
-                  context: context,
-                  position: position.shift(const Offset(50, 55)),
-                  elevation: 8,
-                  color: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  items: <PopupMenuEntry<String>>[
-                    _menuItem(Icons.home_outlined, "Dashboard"),
-                    _menuItem(Icons.person_outline, "Profil"),
-                    _menuItem(Icons.explore_outlined, "Jelajahi"),
-
-                    const PopupMenuDivider(),
-
-                    _menuItem(Icons.book_outlined, "Jurnal Pembiasaan"),
-                    _menuItem(
-                    Icons.person_search_outlined,
-                    "Permintaan Saksi",
+                    context: context,
+                    position: position.shift(const Offset(50, 55)),
+                    elevation: 8,
+                    color: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
                     ),
-                    _menuItem(Icons.bar_chart_outlined, "Progress"),
-                    _menuItem(Icons.error_outline, "Catatan Sikap"),
+                    items: <PopupMenuEntry<String>>[
+                      _menuItem(Icons.home_outlined, "Dashboard"),
+                      _menuItem(Icons.person_outline, "Profil"),
+                      _menuItem(Icons.explore_outlined, "Jelajahi"),
 
-                    const PopupMenuDivider(),
+                      const PopupMenuDivider(),
 
-                    _menuItem(Icons.menu_book_outlined, "Panduan Penggunaan"),
-                    _menuItem(Icons.settings_outlined, "Pengaturan Akun"),
-                    _menuItem(Icons.logout, "Log Out"),
-                  ],
+                      _menuItem(Icons.book_outlined, "Jurnal Pembiasaan"),
+                      _menuItem(
+                        Icons.person_search_outlined,
+                        "Permintaan Saksi",
+                      ),
+                      _menuItem(Icons.bar_chart_outlined, "Progress"),
+                      _menuItem(Icons.error_outline, "Catatan Sikap"),
+
+                      const PopupMenuDivider(),
+
+                      _menuItem(Icons.menu_book_outlined, "Panduan Penggunaan"),
+                      _menuItem(Icons.settings_outlined, "Pengaturan Akun"),
+                      _menuItem(Icons.logout, "Log Out"),
+                    ],
                   );
 
                   if (selected == null) return;
 
                   switch (selected) {
-                  case "Dashboard":
+                    case "Dashboard":
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -151,6 +153,12 @@ class AccountSettings extends StatelessWidget {
                         MaterialPageRoute(builder: (context) => Kompetensi()),
                       );
                       break;
+                    case "Catatan Sikap":
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => CatatanSikap()),
+                      );
+                      break;
                     case "Pengaturan Akun":
                       Navigator.push(
                         context,
@@ -159,6 +167,13 @@ class AccountSettings extends StatelessWidget {
                         ),
                       );
                       break;
+                    case "Panduan Penggunaan":
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Panduan(),
+                        ),
+                      );
                     case "Log Out":
                       Navigator.pushAndRemoveUntil(
                         context,
@@ -172,19 +187,20 @@ class AccountSettings extends StatelessWidget {
                         MaterialPageRoute(builder: (context) => Following()),
                       );
                       break;
-                  default:
-                    ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text("$selected belum tersedia")),
-                    );
+                    default:
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text("$selected belum tersedia")),
+                      );
                   }
                 },
                 child: const CircleAvatar(
                   radius: 20,
                   backgroundImage: NetworkImage(
-                  "https://via.placeholder.com/150",
+                    "https://via.placeholder.com/150",
                   ),
                 ),
-                ),],
+              ),
+            ],
           ),
         ),
       ),

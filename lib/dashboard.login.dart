@@ -3,12 +3,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jurnalku/account-settings.dart';
+import 'package:jurnalku/catatan-sikap.dart';
 import 'package:jurnalku/explore.dart';
 import 'package:jurnalku/following.dart';
 import 'package:jurnalku/dashboard.login.dart';
 import 'package:jurnalku/profile_overview.dart';
 import 'package:jurnalku/profile_portofolio.dart';
 import 'package:jurnalku/profile_sertifikat.dart';
+import 'panduan-pengguna.dart';
 import 'Kompetensi.dart';
 import 'login.dart';
 
@@ -134,6 +136,20 @@ class DashboardLogin extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => Kompetensi()),
+                      );
+                      break;
+                    case "Catatan Sikap":
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => CatatanSikap()),
+                      );
+                      break;
+                    case "Panduan Penggunaan":
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Panduan(),
+                        ),
                       );
                       break;
                     case "Pengaturan Akun":
