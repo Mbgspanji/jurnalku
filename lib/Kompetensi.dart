@@ -13,9 +13,6 @@ import 'package:jurnalku/profile_portofolio.dart';
 import 'package:jurnalku/profile_sertifikat.dart';
 import 'Kompetensi.dart';
 import 'login.dart';
-import 'package:jurnalku/catatan-sikap.dart';
-import 'package:jurnalku/panduan-pengguna.dart';
-
 
 class Kompetensi extends StatefulWidget {
   const Kompetensi({super.key});

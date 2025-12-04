@@ -13,8 +13,7 @@ import 'package:jurnalku/profile_sertifikat.dart';
 import 'package:jurnalku/panduan-pengguna.dart';
 import 'Kompetensi.dart';
 import 'login.dart';
-import 'package:jurnalku/catatan-sikap.dart';
-import 'package:jurnalku/panduan-pengguna.dart';
+
 
 
 class AccountSettings extends StatelessWidget {
